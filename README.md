@@ -94,4 +94,4 @@ NOTE: All of these commands can be executed from the click of a button inside th
 
 ### Obtaining logs
 
-To obtain logs of a container, enter `docker logs containername >& ~/folder/myFile.log`. You can see an example in this repo. 
+To obtain logs of a container, enter `docker logs <containername> >& ~/folder/myFile.log`. You can see an example in this repo. 
