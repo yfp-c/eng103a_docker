@@ -48,4 +48,4 @@ To resume then container: `docker start`
 
 `docker run -d -p 99:80 nginx`This will port forward to port 99, so to enter the site type in on your browser `localhost:99`
 
-`docker run -d -p 4000:4000 docs/docker.github.io` - runs official docker documentation in a container, can be run offline
+`docker run -d -p 4000:4000 docs/docker.github.io` - runs official docker documentation in a container, can be run offline.
