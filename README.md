@@ -128,11 +128,17 @@ nano into the index.html file and make a change to the title.
 e.g. `docker commit 32ca54a7d2b7 test`
 `docker tag test yfpc/test:latest`
 `docker push yfpc/test`
+
+`docker run -d -p 80:80 yfpc/test:latest`
 or
 ```
 - docker build -t <containername/id> <nameit>
 - docker tag <containername/id> <username>/<reponame>
 - docker push <username>/<reponame>:latest
+```
+
+`docker build -t yfpc/103anginx .`
+`docker run -d -p 80:80 yfpc/103anginx:latest`
 
 ### Obtaining logs
 
