@@ -92,6 +92,22 @@ To resume the container: `docker start`
 
 NOTE: All of these commands can be executed from the click of a button inside the docker desktop GUI.
 
+`docker exec -it [id] sh` - ssh into a container. Enter `alias docker="winpty docker"` if you get a non-TTY device error. 
+
+`uname -a` to find information about container
+
+`cd /usr/share/nginx/html`
+
+`apt-get update -y && apt-get upgrade -y` and `apt-get install nano -y` to install nano
+
+nano into the index.html file and make a change to the title. 
+
+![image](https://user-images.githubusercontent.com/98178943/156160260-d2562ca3-0744-47d0-ae2b-76565cd17646.png)
+
+![image](https://user-images.githubusercontent.com/98178943/156160133-571a5a48-c350-4f84-8b45-0586b286a40f.png)
+
+`exit` to go back to the operating system.
+
 ### Obtaining logs
 
 To obtain logs of a container, enter `docker logs <containername> >& ~/folder/myFile.log`. You can see an example in this repo. 
