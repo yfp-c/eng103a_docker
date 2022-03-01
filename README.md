@@ -124,8 +124,12 @@ nano into the index.html file and make a change to the title.
 - docker commit <containername/id> <nameit>
 - docker tag <containername/id> <username>/<reponame>
 - docker push <username>/<reponame>
+```
+e.g. `docker commit 32ca54a7d2b7 test`
+`docker tag test yfpc/test:latest`
+`docker push yfpc/test`
 or
-
+```
 - docker build -t <containername/id> <nameit>
 - docker tag <containername/id> <username>/<reponame>
 - docker push <username>/<reponame>:latest
