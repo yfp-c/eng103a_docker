@@ -108,6 +108,28 @@ nano into the index.html file and make a change to the title.
 
 `exit` to go back to the operating system.
 
+### Copying file from localhost to container
+
+- `docker ps` to find the id/name of container
+
+- `docker cp index.html container_id:/index.html`
+
+- In our case, it is `docker cp index.html romantic_jepsen:/usr/share/nginx/html/index.html`. The changes should be on our webpage from the index.html file. 
+
+![image](https://user-images.githubusercontent.com/98178943/156163562-cc982577-bae4-4c33-bc7b-7e12be48c43f.png)
+
+## To push an image to your dockerhub and to be able to pull it the steps are..
+----------------
+```
+- docker commit <containername/id> <nameit>
+- docker tag <containername/id> <username>/<reponame>
+- docker push <username>/<reponame>
+or
+
+- docker build -t <containername/id> <nameit>
+- docker tag <containername/id> <username>/<reponame>
+- docker push <username>/<reponame>:latest
+
 ### Obtaining logs
 
 To obtain logs of a container, enter `docker logs <containername> >& ~/folder/myFile.log`. You can see an example in this repo. 
