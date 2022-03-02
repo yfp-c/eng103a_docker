@@ -229,6 +229,7 @@ services:
 ```
 
 Enter `docker-compose up -d`
+To stop enter `docker-compose down`
 
 The website should running on port 3000 and posts should show without the database.
 
