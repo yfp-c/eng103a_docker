@@ -23,6 +23,8 @@ Real life example:
 ---------
 ![image](https://user-images.githubusercontent.com/98178943/156005909-eb1546fd-9c71-4928-93f0-a034bf9c083b.png)
 
+Docker is a very powerful containerisation platform that utilises your OS resources to package code into containers.
+
 A container is a very lightweight form of a virtual machine. Virtual machines take up a lot of resources and are slow because they have a lot of overhead (hypervisor, guest OS).
 
 A docker container, on the other hand, has access directly to host OS resources through the docker engine. What this means is that containers can spin up and spin down very quickly.
@@ -143,3 +145,97 @@ or
 ### Obtaining logs
 
 To obtain logs of a container, enter `docker logs <containername> >& ~/folder/myFile.log`. You can see an example in this repo. 
+
+## Setting up app using docker
+
+- Copy the app folder into a folder called `Container`
+
+- Create a new Dockerfile with the components below:
+```yml
+FROM node:latest
+
+WORKDIR /usr/src/app
+
+# COPY package*.json ./
+
+# RUN npm install -g npm@7.20.6
+
+COPY /app /usr/src/app/
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+```
+Enter the container and build the image using this Dockerfile.
+
+e.g. `docker build -t yfpc/yacob_docker_app .`
+`docker run -d -p 3000:3000 yfpc/yacob_docker_app`
+
+To push `docker push yfpc/yacob_docker_app`
+
+#### Build production ready (Multi-stage build)
+- Dependencies
+- current image is in working state
+- listening on required port - port 3000
+- copy app folder
+- npm install
+- npm install express - in some cases
+- 
+- CMD [node. app.js]
+- localhost:3000 displays node=app-home-page
+- add another layer, 
+- add production ready layer
+- options to compress
+- 1) find the smaller size of image to use - check dockerhub - must support our base image
+- create an alias
+- syntax --from=app path of WKDIR:new image WORKDIR
+- E.g. size 105gb to 250mb approximately
+- 
+-  (/usr/src/app)
+
+To copy files from a container to the localhost:
+
+`docker cp bold_yonath:/usr/src/app .`
+`docker cp <containerId>:/file/path/within/container /host/path/target`
+
+### To show posts on our port 3000 from the app, we have to use docker compose.
+---------
+Docker compose uses yml to run commands, we can use it to spin up the containers that we need, in this case being app and db.
+
+Create a file called `docker-compose.yml`
+
+```yml
+version: "3.9"
+services:
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongod.conf:/etc/mongod.conf
+      - ./logs:/var/log/mongod/
+      - ./db:/var/lib/mongodb
+
+  app:
+    build: ./app
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - DB_HOST=mongodb://db:27017/posts
+    depends_on:
+      - db
+    command: node /usr/src/app/seeds/seed.js
+```
+
+Enter `docker-compose up -d`
+
+The website should running on port 3000 and posts should show without the database.
+
+Seed the database if needed by entering `docker exec -t [container id/name] node seeds/seed.js`
+
+## Kubernetes
+----------
+`kubectl get service` or `kubectl get svc` for kubernetes service information
+`kubectl` for official documentation
+`kubectl explain svc` for kind and version information
